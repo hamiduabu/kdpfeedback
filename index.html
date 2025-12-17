@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BERAP 2026 Feedback Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e245f 0%, #17956a 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #17956a, #1e245f);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.95;
+        }
+
+        .form-content {
+            padding: 40px 30px;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #1e245f;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .optional {
+            color: #666;
+            font-weight: 400;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: border-color 0.3s;
+            font-family: inherit;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #17956a;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .radio-option,
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .radio-option:hover,
+        .checkbox-option:hover {
+            border-color: #17956a;
+            background: #f8f9fa;
+        }
+
+        .radio-option.selected,
+        .checkbox-option.selected {
+            border-color: #17956a;
+            background: #f0f9f6;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            cursor: pointer;
+            accent-color: #17956a;
+        }
+
+        .other-input {
+            margin-top: 10px;
+            display: none;
+        }
+
+        .other-input.visible {
+            display: block;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #f2a843, #fbb040);
+            color: #1e245f;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(242, 168, 67, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .message.visible {
+            display: block;
+        }
+
+        .contact-fields {
+            display: grid;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .header {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .form-content {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>BERAP 2026 Feedback Form</h1>
+            <p>Help us shape the Business Enabling Reforms Action Plan for Kaduna State</p>
+        </div>
+
+        <div class="form-content">
+            <div id="message" class="message"></div>
+
+            <form id="berapForm">
+                <!-- Contact Details -->
+                <div class="form-group">
+                    <label>Contact Details <span class="optional">(Optional)</span></label>
+                    <div class="contact-fields">
+                        <input type="text" id="name" name="name" placeholder="Your Name">
+                        <input type="text" id="organisation" name="organisation" placeholder="Organisation">
+                        <input type="email" id="email" name="email" placeholder="Email Address">
+                        <input type="tel" id="phone" name="phone" placeholder="Phone Number">
+                    </div>
+                </div>
+
+                <!-- Relevance Question -->
+                <div class="form-group">
+                    <label>How relevant are the proposed 2026 BERAP reforms to your sector?</label>
+                    <div class="radio-group">
+                        <div class="radio-option" onclick="selectRadio(this)">
+                            <input type="radio" name="relevance" value="Very relevant" required>
+                            <span>Very relevant</span>
+                        </div>
+                        <div class="radio-option" onclick="selectRadio(this)">
+                            <input type="radio" name="relevance" value="Relevant">
+                            <span>Relevant</span>
+                        </div>
+                        <div class="radio-option" onclick="selectRadio(this)">
+                            <input type="radio" name="relevance" value="Somewhat relevant">
+                            <span>Somewhat relevant</span>
+                        </div>
+                        <div class="radio-option" onclick="selectRadio(this)">
+                            <input type="radio" name="relevance" value="Not relevant">
+                            <span>Not relevant</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Priority Areas -->
+                <div class="form-group">
+                    <label>Which reform areas should be prioritised in 2026? <span class="optional">(Select up to two)</span></label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-option" onclick="selectCheckbox(this)">
+                            <input type="checkbox" name="priorities" value="Regulatory approvals & permits">
+                            <span>Regulatory approvals & permits</span>
+                        </div>
+                        <div class="checkbox-option" onclick="selectCheckbox(this)">
+                            <input type="checkbox" name="priorities" value="Cost of doing business / levies">
+                            <span>Cost of doing business / levies</span>
+                        </div>
+                        <div class="checkbox-option" onclick="selectCheckbox(this)">
+                            <input type="checkbox" name="priorities" value="Infrastructure & utilities">
+                            <span>Infrastructure & utilities</span>
+                        </div>
+                        <div class="checkbox-option" onclick="selectCheckbox(this)">
+                            <input type="checkbox" name="priorities" value="Digitalisation of government services">
+                            <span>Digitalisation of government services</span>
+                        </div>
+                        <div class="checkbox-option" onclick="selectCheckbox(this)">
+                            <input type="checkbox" name="priorities" value="Land access & property registration">
+                            <span>Land access & property registration</span>
+                        </div>
+                        <div class="checkbox-option" onclick="selectCheckbox(this)">
+                            <input type="checkbox" name="priorities" value="Tax administration">
+                            <span>Tax administration</span>
+                        </div>
+                        <div class="checkbox-option" onclick="selectCheckbox(this)">
+                            <input type="checkbox" name="priorities" value="Investment incentives">
+                            <span>Investment incentives</span>
+                        </div>
+                        <div class="checkbox-option" onclick="selectCheckbox(this)">
+                            <input type="checkbox" name="priorities" value="Other" id="otherCheckbox">
+                            <span>Other (please specify)</span>
+                        </div>
+                    </div>
+                    <div class="other-input" id="otherInput">
+                        <input type="text" id="otherText" name="otherPriority" placeholder="Please specify...">
+                    </div>
+                </div>
+
+                <!-- Critical Gaps -->
+                <div class="form-group">
+                    <label>Are there any critical gaps or missing actions in the draft 2026 BERAP?</label>
+                    <textarea id="gaps" name="gaps" placeholder="Share your thoughts..." required></textarea>
+                </div>
+
+                <!-- Most Important Reform -->
+                <div class="form-group">
+                    <label>What is the single most important reform that would improve your business operations in Kaduna State?</label>
+                    <textarea id="importantReform" name="importantReform" placeholder="Describe the most impactful reform..." required></textarea>
+                </div>
+
+                <!-- Additional Comments -->
+                <div class="form-group">
+                    <label>Any additional comments or sector-specific recommendations? <span class="optional">(Optional)</span></label>
+                    <textarea id="comments" name="comments" placeholder="Share any additional insights..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">Submit Feedback</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+
+        function selectRadio(element) {
+            const parent = element.parentElement;
+            const allOptions = parent.querySelectorAll('.radio-option');
+            allOptions.forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            element.querySelector('input').checked = true;
+        }
+
+        function selectCheckbox(element) {
+            const checkbox = element.querySelector('input[type="checkbox"]');
+            const checkboxes = document.querySelectorAll('input[name="priorities"]');
+            const checkedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
+
+            if (!checkbox.checked && checkedCount >= 2) {
+                showMessage('You can select up to 2 priorities only.', 'error');
+                return;
+            }
+
+            checkbox.checked = !checkbox.checked;
+            element.classList.toggle('selected');
+
+            if (checkbox.value === 'Other') {
+                const otherInput = document.getElementById('otherInput');
+                otherInput.classList.toggle('visible', checkbox.checked);
+                document.getElementById('otherText').required = checkbox.checked;
+            }
+        }
+
+        function showMessage(text, type) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.textContent = text;
+            messageDiv.className = `message ${type} visible`;
+            setTimeout(() => {
+                messageDiv.classList.remove('visible');
+            }, 5000);
+        }
+
+        document.getElementById('berapForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('submitBtn');
+            const formData = new FormData(e.target);
+            
+            const priorities = Array.from(document.querySelectorAll('input[name="priorities"]:checked'))
+                .map(cb => {
+                    if (cb.value === 'Other') {
+                        return `Other: ${formData.get('otherPriority')}`;
+                    }
+                    return cb.value;
+                })
+                .join(', ');
+
+            const data = {
+                name: formData.get('name') || 'Not provided',
+                organisation: formData.get('organisation') || 'Not provided',
+                email: formData.get('email') || 'Not provided',
+                phone: formData.get('phone') || 'Not provided',
+                relevance: formData.get('relevance'),
+                priorities: priorities,
+                gaps: formData.get('gaps'),
+                importantReform: formData.get('importantReform'),
+                comments: formData.get('comments') || 'Not provided',
+                timestamp: new Date().toLocaleString()
+            };
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+
+            try {
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                showMessage('Thank you! Your feedback has been submitted successfully.', 'success');
+                e.target.reset();
+                document.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
+                document.getElementById('otherInput').classList.remove('visible');
+            } catch (error) {
+                showMessage('An error occurred. Please try again.', 'error');
+                console.error('Error:', error);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Feedback';
+            }
+        });
+    </script>
+</body>
+</html>
