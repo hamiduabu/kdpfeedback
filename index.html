@@ -16,11 +16,14 @@
             background: linear-gradient(135deg, #1e245f 0%, #17956a 100%);
             min-height: 100vh;
             padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .container {
             max-width: 800px;
-            margin: 0 auto;
+            width: 100%;
             background: white;
             border-radius: 12px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
@@ -30,7 +33,7 @@
         .header {
             background: linear-gradient(135deg, #17956a, #1e245f);
             color: white;
-            padding: 40px 30px;
+            padding: 30px;
             text-align: center;
         }
 
@@ -44,26 +47,63 @@
             opacity: 0.95;
         }
 
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e0e0e0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #f2a843, #fbb040);
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
         .form-content {
-            padding: 40px 30px;
+            padding: 50px 40px;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
         }
 
-        .form-group {
-            margin-bottom: 30px;
+        .question-container {
+            display: none;
+            opacity: 0;
+            animation: fadeIn 0.4s forwards;
         }
 
-        label {
+        .question-container.active {
             display: block;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .question-number {
+            color: #17956a;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .question-title {
+            font-size: 22px;
             font-weight: 600;
             color: #1e245f;
-            margin-bottom: 10px;
-            font-size: 15px;
+            margin-bottom: 25px;
+            line-height: 1.4;
         }
 
         .optional {
             color: #666;
             font-weight: 400;
-            font-size: 14px;
+            font-size: 18px;
         }
 
         input[type="text"],
@@ -71,12 +111,13 @@
         input[type="tel"],
         textarea {
             width: 100%;
-            padding: 12px 15px;
+            padding: 14px 18px;
             border: 2px solid #e0e0e0;
             border-radius: 8px;
-            font-size: 15px;
+            font-size: 16px;
             transition: border-color 0.3s;
             font-family: inherit;
+            margin-bottom: 15px;
         }
 
         input[type="text"]:focus,
@@ -89,7 +130,7 @@
 
         textarea {
             resize: vertical;
-            min-height: 100px;
+            min-height: 120px;
         }
 
         .radio-group,
@@ -103,11 +144,12 @@
         .checkbox-option {
             display: flex;
             align-items: center;
-            padding: 12px;
+            padding: 16px 18px;
             border: 2px solid #e0e0e0;
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s;
+            font-size: 16px;
         }
 
         .radio-option:hover,
@@ -126,13 +168,13 @@
         input[type="checkbox"] {
             width: 20px;
             height: 20px;
-            margin-right: 12px;
+            margin-right: 15px;
             cursor: pointer;
             accent-color: #17956a;
         }
 
         .other-input {
-            margin-top: 10px;
+            margin-top: 15px;
             display: none;
         }
 
@@ -140,34 +182,63 @@
             display: block;
         }
 
-        .submit-btn {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #f2a843, #fbb040);
-            color: #1e245f;
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: auto;
+            padding-top: 30px;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 14px 32px;
             border: none;
             border-radius: 8px;
             font-size: 16px;
-            font-weight: 700;
+            font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.3s;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
-        .submit-btn:hover {
+        .btn-previous {
+            background: white;
+            color: #1e245f;
+            border: 2px solid #1e245f;
+        }
+
+        .btn-previous:hover {
+            background: #f8f9fa;
+        }
+
+        .btn-previous:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .btn-next,
+        .btn-submit {
+            background: linear-gradient(135deg, #f2a843, #fbb040);
+            color: #1e245f;
+            flex: 1;
+        }
+
+        .btn-next:hover,
+        .btn-submit:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(242, 168, 67, 0.4);
         }
 
-        .submit-btn:active {
+        .btn-next:active,
+        .btn-submit:active {
             transform: translateY(0);
         }
 
-        .submit-btn:disabled {
+        .btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
-            transform: none;
+            transform: none !important;
         }
 
         .message {
@@ -175,6 +246,7 @@
             border-radius: 8px;
             margin-bottom: 20px;
             display: none;
+            text-align: center;
         }
 
         .message.success {
@@ -193,23 +265,64 @@
             display: block;
         }
 
-        .contact-fields {
-            display: grid;
-            gap: 15px;
-            margin-top: 10px;
+        .success-screen {
+            display: none;
+            text-align: center;
+            padding: 60px 40px;
+        }
+
+        .success-screen.active {
+            display: block;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #17956a, #17956a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 40px;
+        }
+
+        .success-title {
+            font-size: 28px;
+            color: #1e245f;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .success-message {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
         }
 
         @media (max-width: 600px) {
+            .form-content {
+                padding: 30px 25px;
+            }
+
             .header {
-                padding: 30px 20px;
+                padding: 25px 20px;
             }
 
             .header h1 {
                 font-size: 24px;
             }
 
-            .form-content {
-                padding: 30px 20px;
+            .question-title {
+                font-size: 20px;
+            }
+
+            .navigation {
+                flex-direction: column-reverse;
+            }
+
+            .btn {
+                width: 100%;
             }
         }
     </style>
@@ -221,27 +334,31 @@
             <p>Help us shape the Business Enabling Reforms Action Plan for Kaduna State</p>
         </div>
 
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
         <div class="form-content">
             <div id="message" class="message"></div>
 
             <form id="berapForm">
-                <!-- Contact Details -->
-                <div class="form-group">
-                    <label>Contact Details <span class="optional">(Optional)</span></label>
-                    <div class="contact-fields">
-                        <input type="text" id="name" name="name" placeholder="Your Name">
-                        <input type="text" id="organisation" name="organisation" placeholder="Organisation">
-                        <input type="email" id="email" name="email" placeholder="Email Address">
-                        <input type="tel" id="phone" name="phone" placeholder="Phone Number">
-                    </div>
+                <!-- Question 1: Contact Details -->
+                <div class="question-container active" data-question="1">
+                    <div class="question-number">Question 1 of 6</div>
+                    <h2 class="question-title">Contact Details <span class="optional">(Optional)</span></h2>
+                    <input type="text" id="name" name="name" placeholder="Your Name">
+                    <input type="text" id="organisation" name="organisation" placeholder="Organisation">
+                    <input type="email" id="email" name="email" placeholder="Email Address">
+                    <input type="tel" id="phone" name="phone" placeholder="Phone Number">
                 </div>
 
-                <!-- Relevance Question -->
-                <div class="form-group">
-                    <label>How relevant are the proposed 2026 BERAP reforms to your sector?</label>
+                <!-- Question 2: Relevance -->
+                <div class="question-container" data-question="2">
+                    <div class="question-number">Question 2 of 6</div>
+                    <h2 class="question-title">How relevant are the proposed 2026 BERAP reforms to your sector?</h2>
                     <div class="radio-group">
                         <div class="radio-option" onclick="selectRadio(this)">
-                            <input type="radio" name="relevance" value="Very relevant" required>
+                            <input type="radio" name="relevance" value="Very relevant">
                             <span>Very relevant</span>
                         </div>
                         <div class="radio-option" onclick="selectRadio(this)">
@@ -259,9 +376,10 @@
                     </div>
                 </div>
 
-                <!-- Priority Areas -->
-                <div class="form-group">
-                    <label>Which reform areas should be prioritised in 2026? <span class="optional">(Select up to two)</span></label>
+                <!-- Question 3: Priorities -->
+                <div class="question-container" data-question="3">
+                    <div class="question-number">Question 3 of 6</div>
+                    <h2 class="question-title">Which reform areas should be prioritised in 2026? <span class="optional">(Select up to two)</span></h2>
                     <div class="checkbox-group">
                         <div class="checkbox-option" onclick="selectCheckbox(this)">
                             <input type="checkbox" name="priorities" value="Regulatory approvals & permits">
@@ -301,31 +419,135 @@
                     </div>
                 </div>
 
-                <!-- Critical Gaps -->
-                <div class="form-group">
-                    <label>Are there any critical gaps or missing actions in the draft 2026 BERAP?</label>
-                    <textarea id="gaps" name="gaps" placeholder="Share your thoughts..." required></textarea>
+                <!-- Question 4: Critical Gaps -->
+                <div class="question-container" data-question="4">
+                    <div class="question-number">Question 4 of 6</div>
+                    <h2 class="question-title">Are there any critical gaps or missing actions in the draft 2026 BERAP?</h2>
+                    <textarea id="gaps" name="gaps" placeholder="Share your thoughts..."></textarea>
                 </div>
 
-                <!-- Most Important Reform -->
-                <div class="form-group">
-                    <label>What is the single most important reform that would improve your business operations in Kaduna State?</label>
-                    <textarea id="importantReform" name="importantReform" placeholder="Describe the most impactful reform..." required></textarea>
+                <!-- Question 5: Most Important Reform -->
+                <div class="question-container" data-question="5">
+                    <div class="question-number">Question 5 of 6</div>
+                    <h2 class="question-title">What is the single most important reform that would improve your business operations in Kaduna State?</h2>
+                    <textarea id="importantReform" name="importantReform" placeholder="Describe the most impactful reform..."></textarea>
                 </div>
 
-                <!-- Additional Comments -->
-                <div class="form-group">
-                    <label>Any additional comments or sector-specific recommendations? <span class="optional">(Optional)</span></label>
+                <!-- Question 6: Additional Comments -->
+                <div class="question-container" data-question="6">
+                    <div class="question-number">Question 6 of 6</div>
+                    <h2 class="question-title">Any additional comments or sector-specific recommendations? <span class="optional">(Optional)</span></h2>
                     <textarea id="comments" name="comments" placeholder="Share any additional insights..."></textarea>
                 </div>
-
-                <button type="submit" class="submit-btn" id="submitBtn">Submit Feedback</button>
             </form>
+
+            <!-- Success Screen -->
+            <div class="success-screen" id="successScreen">
+                <div class="success-icon">✓</div>
+                <h2 class="success-title">Thank You!</h2>
+                <p class="success-message">Your feedback has been submitted successfully. We appreciate your contribution to shaping the Business Enabling Reforms Action Plan for Kaduna State.</p>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="navigation" id="navigationButtons">
+                <button type="button" class="btn btn-previous" id="prevBtn" onclick="previousQuestion()">Previous</button>
+                <button type="button" class="btn btn-next" id="nextBtn" onclick="nextQuestion()">Next</button>
+                <button type="button" class="btn btn-submit" id="submitBtn" onclick="submitForm()" style="display: none;">Submit</button>
+            </div>
         </div>
     </div>
 
     <script>
         const SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+        let currentQuestion = 1;
+        const totalQuestions = 6;
+
+        function updateProgress() {
+            const progress = (currentQuestion / totalQuestions) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function showQuestion(questionNum) {
+            document.querySelectorAll('.question-container').forEach(q => {
+                q.classList.remove('active');
+            });
+            document.querySelector(`[data-question="${questionNum}"]`).classList.add('active');
+            
+            document.getElementById('prevBtn').disabled = questionNum === 1;
+            
+            if (questionNum === totalQuestions) {
+                document.getElementById('nextBtn').style.display = 'none';
+                document.getElementById('submitBtn').style.display = 'block';
+            } else {
+                document.getElementById('nextBtn').style.display = 'block';
+                document.getElementById('submitBtn').style.display = 'none';
+            }
+            
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function validateCurrentQuestion() {
+            const currentContainer = document.querySelector(`[data-question="${currentQuestion}"]`);
+            
+            if (currentQuestion === 2) {
+                const relevance = document.querySelector('input[name="relevance"]:checked');
+                if (!relevance) {
+                    showMessage('Please select an option to continue.', 'error');
+                    return false;
+                }
+            }
+            
+            if (currentQuestion === 3) {
+                const priorities = document.querySelectorAll('input[name="priorities"]:checked');
+                if (priorities.length === 0) {
+                    showMessage('Please select at least one priority.', 'error');
+                    return false;
+                }
+                const otherCheckbox = document.querySelector('input[name="priorities"][value="Other"]');
+                if (otherCheckbox && otherCheckbox.checked) {
+                    const otherText = document.getElementById('otherText').value.trim();
+                    if (!otherText) {
+                        showMessage('Please specify your other priority.', 'error');
+                        return false;
+                    }
+                }
+            }
+            
+            if (currentQuestion === 4) {
+                const gaps = document.getElementById('gaps').value.trim();
+                if (!gaps) {
+                    showMessage('Please provide your answer to continue.', 'error');
+                    return false;
+                }
+            }
+            
+            if (currentQuestion === 5) {
+                const reform = document.getElementById('importantReform').value.trim();
+                if (!reform) {
+                    showMessage('Please provide your answer to continue.', 'error');
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+
+        function nextQuestion() {
+            if (!validateCurrentQuestion()) return;
+            
+            if (currentQuestion < totalQuestions) {
+                currentQuestion++;
+                showQuestion(currentQuestion);
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 1) {
+                currentQuestion--;
+                showQuestion(currentQuestion);
+            }
+        }
 
         function selectRadio(element) {
             const parent = element.parentElement;
@@ -351,7 +573,6 @@
             if (checkbox.value === 'Other') {
                 const otherInput = document.getElementById('otherInput');
                 otherInput.classList.toggle('visible', checkbox.checked);
-                document.getElementById('otherText').required = checkbox.checked;
             }
         }
 
@@ -361,14 +582,14 @@
             messageDiv.className = `message ${type} visible`;
             setTimeout(() => {
                 messageDiv.classList.remove('visible');
-            }, 5000);
+            }, 4000);
         }
 
-        document.getElementById('berapForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
+        async function submitForm() {
+            if (!validateCurrentQuestion()) return;
 
             const submitBtn = document.getElementById('submitBtn');
-            const formData = new FormData(e.target);
+            const formData = new FormData(document.getElementById('berapForm'));
             
             const priorities = Array.from(document.querySelectorAll('input[name="priorities"]:checked'))
                 .map(cb => {
@@ -385,7 +606,7 @@
                 email: formData.get('email') || 'Not provided',
                 phone: formData.get('phone') || 'Not provided',
                 relevance: formData.get('relevance'),
-                priorities: priorities,
+                priorities: priorities || 'Not provided',
                 gaps: formData.get('gaps'),
                 importantReform: formData.get('importantReform'),
                 comments: formData.get('comments') || 'Not provided',
@@ -396,7 +617,7 @@
             submitBtn.textContent = 'Submitting...';
 
             try {
-                const response = await fetch(SCRIPT_URL, {
+                await fetch(SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
                     headers: {
@@ -405,18 +626,20 @@
                     body: JSON.stringify(data)
                 });
 
-                showMessage('Thank you! Your feedback has been submitted successfully.', 'success');
-                e.target.reset();
-                document.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
-                document.getElementById('otherInput').classList.remove('visible');
+                document.getElementById('navigationButtons').style.display = 'none';
+                document.querySelector('.question-container.active').classList.remove('active');
+                document.getElementById('successScreen').classList.add('active');
+                document.getElementById('progressFill').style.width = '100%';
             } catch (error) {
                 showMessage('An error occurred. Please try again.', 'error');
                 console.error('Error:', error);
-            } finally {
                 submitBtn.disabled = false;
-                submitBtn.textContent = 'Submit Feedback';
+                submitBtn.textContent = 'Submit';
             }
-        });
+        }
+
+        // Initialize
+        updateProgress();
     </script>
 </body>
 </html>
