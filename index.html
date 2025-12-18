@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e245f 0%, #17956a 100%);
+            background: #1e245f;
             min-height: 100vh;
             padding: 20px;
             display: flex;
@@ -22,28 +22,47 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 700px;
             width: 100%;
-            background: white;
+            background: #ffffff;
             border-radius: 12px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             overflow: hidden;
         }
 
         .header {
-            background: linear-gradient(135deg, #17956a, #1e245f);
-            color: white;
-            padding: 30px;
-            text-align: center;
+            background: #17956a;
+            color: #ffffff;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo-container {
+            width: 65px;
+            height: 65px;
+            background: #ffffff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            padding: 2px;
+        }
+
+        .header-text {
+            flex: 1;
+            text-align: left;
         }
 
         .header h1 {
-            font-size: 28px;
-            margin-bottom: 10px;
+            font-size: 24px;
+            margin-bottom: 8px;
         }
 
         .header p {
-            font-size: 16px;
+            font-size: 14px;
             opacity: 0.95;
         }
 
@@ -61,8 +80,8 @@
         }
 
         .form-content {
-            padding: 50px 40px;
-            min-height: 400px;
+            padding: 30px;
+            min-height: 350px;
             display: flex;
             flex-direction: column;
         }
@@ -85,25 +104,25 @@
 
         .question-number {
             color: #17956a;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
         .question-title {
-            font-size: 22px;
+            font-size: 19px;
             font-weight: 600;
             color: #1e245f;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             line-height: 1.4;
         }
 
         .optional {
             color: #666;
             font-weight: 400;
-            font-size: 18px;
+            font-size: 16px;
         }
 
         input[type="text"],
@@ -111,13 +130,13 @@
         input[type="tel"],
         textarea {
             width: 100%;
-            padding: 14px 18px;
+            padding: 11px 14px;
             border: 2px solid #e0e0e0;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 15px;
             transition: border-color 0.3s;
             font-family: inherit;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         input[type="text"]:focus,
@@ -130,26 +149,26 @@
 
         textarea {
             resize: vertical;
-            min-height: 120px;
+            min-height: 100px;
         }
 
         .radio-group,
         .checkbox-group {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
 
         .radio-option,
         .checkbox-option {
             display: flex;
             align-items: center;
-            padding: 16px 18px;
+            padding: 12px 14px;
             border: 2px solid #e0e0e0;
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s;
-            font-size: 16px;
+            font-size: 15px;
         }
 
         .radio-option:hover,
@@ -186,15 +205,15 @@
             display: flex;
             justify-content: space-between;
             margin-top: auto;
-            padding-top: 30px;
-            gap: 15px;
+            padding-top: 25px;
+            gap: 12px;
         }
 
         .btn {
-            padding: 14px 32px;
+            padding: 12px 28px;
             border: none;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
@@ -203,7 +222,7 @@
         }
 
         .btn-previous {
-            background: white;
+            background: #ffffff;
             color: #1e245f;
             border: 2px solid #1e245f;
         }
@@ -268,7 +287,7 @@
         .success-screen {
             display: none;
             text-align: center;
-            padding: 60px 40px;
+            padding: 50px 30px;
         }
 
         .success-screen.active {
@@ -276,45 +295,61 @@
         }
 
         .success-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #17956a, #17956a);
+            width: 70px;
+            height: 70px;
+            background: #17956a;
+            color: #ffffff;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 25px;
-            font-size: 40px;
+            margin: 0 auto 20px;
+            font-size: 36px;
         }
 
         .success-title {
-            font-size: 28px;
+            font-size: 26px;
             color: #1e245f;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             font-weight: 600;
         }
 
         .success-message {
-            font-size: 16px;
+            font-size: 15px;
             color: #666;
             line-height: 1.6;
         }
 
         @media (max-width: 600px) {
             .form-content {
-                padding: 30px 25px;
-            }
-
-            .header {
                 padding: 25px 20px;
             }
 
+            .header {
+                padding: 20px;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo-container {
+                width: 60px;
+                height: 60px;
+            }
+
+            .header-text {
+                text-align: center;
+            }
+
             .header h1 {
-                font-size: 24px;
+                font-size: 20px;
+            }
+
+            .header p {
+                font-size: 13px;
             }
 
             .question-title {
-                font-size: 20px;
+                font-size: 18px;
             }
 
             .navigation {
@@ -330,8 +365,13 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>BERAP 2026 Feedback Form</h1>
-            <p>Help us shape the Business Enabling Reforms Action Plan for Kaduna State</p>
+            <div class="logo-container">
+                <img src="kadipa_logo.png" alt="KADIPA Logo" style="width: 100%; height: 100%; object-fit: contain;">
+            </div>
+            <div class="header-text">
+                <h1>BERAP 2026 Feedback Form</h1>
+                <p>Help us shape the Business Enabling Reforms Action Plan for Kaduna State</p>
+            </div>
         </div>
 
         <div class="progress-bar">
@@ -443,7 +483,7 @@
 
             <!-- Success Screen -->
             <div class="success-screen" id="successScreen">
-                <div class="success-icon">✓</div>
+                <div class="success-icon">✔</div>
                 <h2 class="success-title">Thank You!</h2>
                 <p class="success-message">Your feedback has been submitted successfully. We appreciate your contribution to shaping the Business Enabling Reforms Action Plan for Kaduna State.</p>
             </div>
@@ -458,7 +498,7 @@
     </div>
 
     <script>
-        const SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw0S4M-zDhT3Bf0LATjRm7DcNOGNEpHF-X83yQLLHJVDsmEjjFZ5l5mTladkV4gkmyqdg/exec';
         let currentQuestion = 1;
         const totalQuestions = 6;
 
